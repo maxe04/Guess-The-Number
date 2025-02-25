@@ -36,7 +36,7 @@ Guessing correctly:  <br/>
 <br />
 <br />
 Restarting game:  <br/>
-<img src="https://i.imgur.com/qePgVvn.png" height="60%" width="60%" alt="Disk Sanitization Steps"/>
+<img src="https://i.imgur.com/x4gFHFI.png" height="60%" width="60%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
 Invalid Input:  <br/>
