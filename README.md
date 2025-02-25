@@ -20,7 +20,7 @@ Edit path to music file and button sound file in the "playSound" method in the G
 
 - <b>Eclipse IDE</b> 
 
-<h2>Program walk-through:</h2>
+<h2>Program walkthrough:</h2>
 
 <p align="center">
 Welcome Screen: <br/>
