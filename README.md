@@ -6,6 +6,10 @@
 Simple number guessing game with sounds, background music, UI and game logic.
 <br />
 
+<h2>How to Use</h2>
+Edit path to music file and button sound file in the "playSound" method in the Game class.
+<br />
+
 
 <h2>Languages and Libraries Used</h2>
 
