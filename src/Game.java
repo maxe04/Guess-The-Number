@@ -2,16 +2,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
-import java.io.File;
-import java.io.IOException;
 import java.util.Random;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.FloatControl;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -49,28 +41,33 @@ public class Game {
 	
 	private JMenuItem exitGame;
 	private JMenuItem restartGame;
-
-	private Random randColor = new Random();
 	
+	private Random randColor = new Random();
 	private int randomNumber;
 	
-	
 	private Font buttonFont = new Font("Helvetica", Font.BOLD, 35	);
+	
+	private SoundPlayer soundPlayer = new SoundPlayer();
+	
+	
 	
 	public Game() {
 		//Initialize Program
 		initialize();
 		//Generate Number to Guess
 		generateNumber();
+		
 		//Play Music
-		playSound("C:\\Users\\GameBox\\eigeneProj\\NumberGuessingGame\\src\\music.wav");
+		//EDIT music.wav PATH HERE
+		soundPlayer.playSound("C:\\YOUR\\PATH\\music.wav");
 	}
 	
 	private void initialize() {
+		//Initializing Window
 		window = new JFrame();
 		con = window.getContentPane();
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setTitle("Number Guessing Game");
+		window.setTitle("Guess The Number");
 		window.setSize(600, 600);
 		window.setLayout(null);
 		window.setLocationRelativeTo(null);
@@ -78,7 +75,7 @@ public class Game {
 		con = window.getContentPane();
 		con.setBackground(Color.black);
 		
-		//Create Menu
+		//Creating Menu
 		menuBar = new JMenuBar();
 		gameMenu = new JMenu("Game");
 		
@@ -96,7 +93,7 @@ public class Game {
 		});
         exitGame.addActionListener(e -> System.exit(0));
 		
-		//Title
+		//Creating Title
 		titlePanel = new JPanel();
 		titleName = new JLabel(new ImageIcon(Game.class.getResource("guessthenumberlogo.png")));
 		
@@ -125,7 +122,11 @@ public class Game {
 			}
 			//If valid input
 			else {
-				playSound("C:\\Users\\GameBox\\eigeneProj\\NumberGuessingGame\\src\\buttonsound.wav");
+				
+				//Play Button Sound
+				//EDIT buttonsound.wav PATH HERE
+				soundPlayer.playSound("C:\\YOUR\\PATH\\buttonsound.wav");
+				
 				if(Integer.parseInt(input) == randomNumber) {
 					hintLabel.setText("Correct!");
 					hintLabel.setForeground(new Color(randColor.nextInt(255),randColor.nextInt(255),randColor.nextInt(255)));
@@ -190,43 +191,28 @@ public class Game {
 		con.add(hintPanel);
 	}
 	
+	//Make window visible
 	public void show() {
 		window.setVisible(true);
 	}
 	
+	//Generate random number to guess
 	private int generateNumber() {
 		Random rand = new Random();
 		randomNumber = rand.nextInt(50) + 1;
 		return randomNumber;
 	}
 	
+	//Restart the game
 	private void restartGame() {
-		generateNumber();
-		hintLabel.setText("Try it!");
-		hintLabel.setForeground(Color.white);
-		textField.setText("");
-		textField.setVisible(true);
+		Game restartedGame = new Game();
+		restartedGame.show();
+		soundPlayer.stop();
+		window.dispose();
+		
 	}
 	
-	private static void playSound(String soundFilePath) {
-        try {
-            
-            File soundFile = new File(soundFilePath);
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(soundFile);
-            
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioStream);
-
-            //Lower the volume (could add menu button to let the user change the volume)
-            FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            volumeControl.setValue(-5.0f);
-            
-            
-            clip.start();
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
-            ex.printStackTrace();
-        }
-    }
+	
 
 
 }
