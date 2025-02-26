@@ -1,7 +1,5 @@
 <h1>Guess The Number</h1>
 
-
-<h2>Description</h2>
 Simple number guessing game with sounds, background music, UI and game logic.
 <br />
 
